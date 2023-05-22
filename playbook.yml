@@ -1,0 +1,22 @@
+- hosts: ubuntu
+  tasks:
+  - name: Install apache httpd  (state=present is optional)
+    apt:
+      name: apache2
+      state: present
+      update_cache: yes
+ 
+  - name: install apache unzip
+    apt:
+      name: unzip
+      state: present
+      update_cache: yes 
+
+  - name: extract template
+    unarchive:
+      src: https://www.free-css.com/assets/files/free-css-templates/download/page279/icream.zip
+      dest: /tmp/
+      remote_src: yes   
+
+  - name: move template files to /var/wwww/html
+    shell: "rm -rf /var/www/html/* && mv /tmp/ice-cream-shop-website-template/* /var/www/html/"
